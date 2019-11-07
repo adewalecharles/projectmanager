@@ -16,13 +16,10 @@ Route::get('/', function () {
 });
 
 
-Route::post('/projects', function (){
-// validate
-// persist
-App\Project::create(request(['title', 'description']));
-//redirect
+Route::get('/projects', 'ProjectsController@index');
 
-});
+Route::post('/projects', 'ProjectsController@store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
