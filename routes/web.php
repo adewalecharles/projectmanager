@@ -23,3 +23,6 @@ App\Project::create(request(['title', 'description']));
 //redirect
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
