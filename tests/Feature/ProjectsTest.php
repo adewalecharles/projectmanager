@@ -11,6 +11,16 @@ class ProjectsTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
+    
+    
+    public function only_aunthenticated_users_can_create_project()
+    {
+
+        $attributes = factory('App\Project')->raw();
+
+        $this->post('/projects', $attributes)->assertRedirect('/login');
+    }
+
     public function test_a_user_can_create_a_project()
     {
 
@@ -28,6 +38,16 @@ class ProjectsTest extends TestCase
        $this->get('/projects')->assertSee($attributes['title']);
     }
 
+    public function a_user_can_vieew_a_project()
+    {
+        $this->withExceptionHandling();
+
+        $project = factory('App\Project')->create();
+
+        $this->get($project->path())
+        ->assertSee($project->title)
+        ->assertSee($project->description);
+    }
 
     public function a_project_requires_a_title()
     {   
@@ -45,5 +65,6 @@ class ProjectsTest extends TestCase
 
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');
     }
+
 
 }

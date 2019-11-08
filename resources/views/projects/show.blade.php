@@ -7,18 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Project Manager</h1>
+    <h1>{{$project->title}}</h1>
+    <div>{{$project->description}}
 
-    <ul>
-        @forelse ($projects as $project)
-        <li>
-
-            <a href="{{$project->path()}}">{{$project->title}}</a>
-
-        </li>
-        @empty
-        <li>No projects yet</li>
-        @endforelse
-    </ul>
+    
 </body>
 </html>
